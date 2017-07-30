@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive Email</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'proxima nova', Arial, sans-serif;
+        background-color: #F2F2F5;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 2em;
+      }
+
+      #container {
+        max-width: 1100px;
+        width: 94%;
+        margin: 1.5em auto;
+        padding: 2em 1.5em;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(65,65,70,.1);
+        border-bottom: 1px solid #f2f2f5;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      #no-data {
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
+        color: #555;
+        margin-top: .7em;
+        font-weight: bold;
+      }
+
+      #no-data .emoji {
+        margin-top: .2em;
+        font-size: 2.5em;
+      }
+
+      #store > *:first-child, #email > *:first-child {
+        padding-top: 0;
+        margin-top: 0;
+      }
+
+      #store {
+        width: 59%;
+        margin-right: 2%;
+      }
+
+      .form {
+      }
+
+      .form-title {
+        font-size: 1.15em;
+        margin-bottom: .75em;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .form-title:after {
+        content: "\203A";
+        font-size: 1.5em;
+        margin-bottom: -1px;
+        margin-left: 5px;
+      }
+
+      .submission-id:before {
+        content: "id: ";
+      }
+
+      .submission-id {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: .1em;
+        margin-top: 1em;
+      }
+
+      .submission-data {
+        color: #888;
+        overflow: auto;
+        padding: 3px 0;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .submission-data span {
+        padding: 0 3px;
+        height: 1.5em;
+        min-width: 1.5em;
+        line-height: 1.5em;
+        text-align: center;
+        display: inline-block;
+      }
+      
+      .submission-data > span {
+        margin-right: 5px;
+      }
+      .submission-data > span:not(:last-child):after {
+        content: ",";
+        font-size: 2em;
+        color: #BBB;
+      }
+
+      .submission-data .value {
+        background: #f3f3f3;
+      }
+
+      .submission-data .value.is-emoji {
+        background: #f3f3f3;
+        border: 1px solid rgb(231, 231, 231);
+        line-height: 1.65em;
+        border-radius: 50%;
+      }
+
+      .submission-reply {
+        font-style: italic;
+        color: #555;
+        padding: 10px 5px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      
+      #email {
+        width: 39%;
+      }
+
+      .email-log {
+        padding: 1em 0;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .email-log b {
+        font-weight: normal;
+        font-style: italic;
+      }
+
+      .email-log span:before {
+        content: "id: ";
+      }
+      .email-log span {
+        margin-top: 3px;
+        display: block;
+        font-size: .9em;
+        color: #888;
+        font-weight: bold;
+      }
+
+      #logo {
+        max-width: 1100px;
+        margin: auto;
+        text-align: right;
+      }
+
+      #logo img {
+        width: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Interactive Email 💌</h1>
+    <div id="container">
+      <div id="no-data">
+        No data yet.
+        <div class="emoji">😢</div>
+      </div>
+      <div id="store" style="display: none;"></div>
+      <div id="email" style="display: none;"></div>
+    </div>
+    <div id="logo">
+      <img src="https://raw.githubusercontent.com/SparkPost/php-sparkpost/master/examples/transmissions/sparkpost.png" alt="SparkPost">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script>
+      var socket = io();
+      var $store = $('#store');
+      var $email = $('#email');
+      var $noData = $('#no-data');
+      var hasData = false;
+
+      function gotData() {
+        if (!hasData) {
+          hasData = true;
+          $noData.hide();
+          $store.show();
+          $email.show();
+        }
+      }
+
+      function gotStoreData(store) {
+
+        if (Object.keys(store).length > 0) {
+          gotData();
+          
+          var html = '';
+          for (var form in store) {
+            var formSubmissions = store[form];
+            html += '<div class="form">';
+            html += '<div class="form-title">'+form+'</div>';
+
+            for (var submission in formSubmissions) {
+              var submissionData = formSubmissions[submission];
+              var keys = Object.keys(submissionData).sort().filter(key => key !== 'reply');
+              html += '<div class="submission-id">'+submission+'</div>';
+              html += '<div class="submission-data">';
+  
+              for (var key of keys) {
+                var value = submissionData[key] === 'yes' ? '✔' : submissionData[key] === 'no' ? '❌' : submissionData[key];
+                html += '<span>'+key+' <span class="value '+(isEmoji(value) ? 'is-emoji' : '')+'">'+value+'</span></span>';
+              }
+
+              html += '</div>';
+
+              if (submissionData['reply']) {
+                html += '<div class="submission-reply">'+submissionData['reply']+'</div>';
+              }
+            }
+
+            html += '</div>';
+          }
+
+          $store.html(html);
+        }
+      }
+
+      socket.emit('refresh');
+
+      socket.on('store', gotStoreData);
+
+      socket.on('email', function(data) {
+        gotData();
+        $email.append('<div class="email-log">📤 <b>'+data.form+'</b> &rsaquo; <b>'+data.address+'</b><span>'+data.id+'</span></div>');
+      });
+      
+
+      function isEmoji(str) {
+        if (str === '✔' || str === '❌')
+          return true;
+
+        var ranges = [
+            '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+            '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+            '\ud83d[\ude80-\udeff]' // U+1F680 to U+1F6FF
+        ];
+        if (str.match(ranges.join('|'))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+[
+  {
+    "msys": {
+      "relay_message": {
+        "rcpt_to": "test@sendmailfor.me",
+        "friendly_from": "avi.goldman@sparkpost.com",
+        "customer_id": "56760",
+        "content": {
+          "subject": "Re: Test",
+          "text": "hi there",
+          "headers": [
+            {
+              "Return-Path": "<avi.goldman@sparkpost.com>"
+            },
+            {
+              "Authentication-Results": "a.mta1vsmtp.cc.prd.sparkpost x-tls.subject=\"/C=US/ST=California/L=Mountain View/O=Google Inc/CN=smtp.gmail.com\"; auth=fail (cipher=ECDHE-RSA-AES128-GCM-SHA256)"
+            },
+            {
+              "Received": "from [10.92.40.15] ([10.92.40.15:52592] helo=mail-qk0-f170.google.com) by a.mta1vsmtp.cc.prd.sparkpost (envelope-from <avi.goldman@sparkpost.com>) (ecelerity 4.2.33.60423 r(Core:4.2.33.0)) with ESMTPS (cipher=ECDHE-RSA-AES128-GCM-SHA256 subject=\"/C=US/ST=California/L=Mountain View/O=Google Inc/CN=smtp.gmail.com\")  id B6/51-27437-76329695; Fri, 14 Jul 2017 20:02:47 +0000"
+            },
+            {
+              "Received": "by mail-qk0-f170.google.com with SMTP id v17so78058668qka.3 for <test@sendmailfor.me>; Fri, 14 Jul 2017 13:02:47 -0700 (PDT)"
+            },
+            {
+              "DKIM-Signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=sparkpost.com; s=google; h=mime-version:subject:from:in-reply-to:date :content-transfer-encoding:message-id:references:to; bh=PUjLmNN475OVI8j6Q0gjYRhTeVvCbactsdrTEkajaZc=; b=f+xhS44ya29n4R6vE7IYRfdstPGH5FtD37UN2JCJxSGog/DFBpfG2AtLsiZF5WbbxZ Y8nfeztA7FGPQiQJRAU6YBIU1o7eepUcxmnAyNTFDuQ4iu2Oltb3F9QtH+Vka8i3lvo7 /YjLxe/fosZEqiEhJNJ5qyMaNl0Q+3OWahSNw="
+            },
+            {
+              "X-Google-DKIM-Signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20161025; h=x-gm-message-state:mime-version:subject:from:in-reply-to:date :content-transfer-encoding:message-id:references:to; bh=PUjLmNN475OVI8j6Q0gjYRhTeVvCbactsdrTEkajaZc=; b=HhaDWQlCQj68Axn32zfZktdmDtAjECFzsUdIVXxBKHWzKUpJujs9sXUbShkaCqF90p K3xCm1+l8y0UZjSyLS2N78mBgbP7qauuq/GyyJFKZgXaxZnL5+JZt8U/ahb7uWDyPtRp Z8mTRhr0/7G/2tn3ZJC2z4iIpc18BRmJBqrgvGKldvrPoToriJEpzez1g1R+lwv++Ici ggwRo89Hp6w88A603QHCgpVgIHMT5/N/KtCLrRAK3N3ueQ1i9UcTU4MIpR7FP7oyeHD6 3zcsBKCo7r4WBtaAEaM++wttPX7uY2kn4HKt9fEUh1IZyNBwrXZqdnqvRHvPvw1A2wpO +NGw=="
+            },
+            {
+              "X-Gm-Message-State": "AIVw111QoVe0APc/oB48SFi97uKf8cJ3g8jUmfTbXmdkI2pGXPiHiiv/ S3r+kEit69C2VVF0UZjkbg=="
+            },
+            {
+              "X-Received": "by 10.233.216.1 with SMTP id u1mr13039022qkf.10.1500062566429; Fri, 14 Jul 2017 13:02:46 -0700 (PDT)"
+            },
+            {
+              "Received": "from [172.31.99.153] (50-246-89-187-static.hfc.comcastbusiness.net. [50.246.89.187]) by smtp.gmail.com with ESMTPSA id q40sm7867459qtf.42.2017.07.14.13.02.44 for <test@sendmailfor.me> (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128); Fri, 14 Jul 2017 13:02:45 -0700 (PDT)"
+            },
+            {
+              "Content-Type": "text/plain; charset=us-ascii"
+            },
+            {
+              "Mime-Version": "1.0 (Mac OS X Mail 9.3 \\(3124\\))"
+            },
+            {
+              "Subject": "Re: Test"
+            },
+            {
+              "From": "Avi Goldman <avi.goldman@sparkpost.com>"
+            },
+            {
+              "In-Reply-To": "<B5.01.04309.E1029695@a.mta1vrest.cc.prd.sparkpost>"
+            },
+            {
+              "Date": "Fri, 14 Jul 2017 16:03:23 -0400"
+            },
+            {
+              "Content-Transfer-Encoding": "7bit"
+            },
+            {
+              "Message-Id": "<079ABE5F-7432-4733-9400-091223B1487C@sparkpost.com>"
+            },
+            {
+              "References": "<B5.01.04309.E1029695@a.mta1vrest.cc.prd.sparkpost>"
+            },
+            {
+              "To": "Test <test@sendmailfor.me>"
+            },
+            {
+              "X-Mailer": "Apple Mail (2.3124)"
+            }
+          ],
+          "email_rfc822": "Return-Path: <avi.goldman@sparkpost.com>\nAuthentication-Results:  a.mta1vsmtp.cc.prd.sparkpost x-tls.subject=\"/C=US/ST=California/L=Mountain View/O=Google Inc/CN=smtp.gmail.com\"; auth=fail (cipher=ECDHE-RSA-AES128-GCM-SHA256)\nReceived: from [10.92.40.15] ([10.92.40.15:52592] helo=mail-qk0-f170.google.com)\n\tby a.mta1vsmtp.cc.prd.sparkpost (envelope-from <avi.goldman@sparkpost.com>)\n\t(ecelerity 4.2.33.60423 r(Core:4.2.33.0)) with ESMTPS (cipher=ECDHE-RSA-AES128-GCM-SHA256\n\tsubject=\"/C=US/ST=California/L=Mountain View/O=Google Inc/CN=smtp.gmail.com\") \n\tid B6/51-27437-76329695; Fri, 14 Jul 2017 20:02:47 +0000\nReceived: by mail-qk0-f170.google.com with SMTP id v17so78058668qka.3\n        for <test@sendmailfor.me>; Fri, 14 Jul 2017 13:02:47 -0700 (PDT)\nDKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\n        d=sparkpost.com; s=google;\n        h=mime-version:subject:from:in-reply-to:date\n         :content-transfer-encoding:message-id:references:to;\n        bh=PUjLmNN475OVI8j6Q0gjYRhTeVvCbactsdrTEkajaZc=;\n        b=f+xhS44ya29n4R6vE7IYRfdstPGH5FtD37UN2JCJxSGog/DFBpfG2AtLsiZF5WbbxZ\n         Y8nfeztA7FGPQiQJRAU6YBIU1o7eepUcxmnAyNTFDuQ4iu2Oltb3F9QtH+Vka8i3lvo7\n         /YjLxe/fosZEqiEhJNJ5qyMaNl0Q+3OWahSNw=\nX-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\n        d=1e100.net; s=20161025;\n        h=x-gm-message-state:mime-version:subject:from:in-reply-to:date\n         :content-transfer-encoding:message-id:references:to;\n        bh=PUjLmNN475OVI8j6Q0gjYRhTeVvCbactsdrTEkajaZc=;\n        b=HhaDWQlCQj68Axn32zfZktdmDtAjECFzsUdIVXxBKHWzKUpJujs9sXUbShkaCqF90p\n         K3xCm1+l8y0UZjSyLS2N78mBgbP7qauuq/GyyJFKZgXaxZnL5+JZt8U/ahb7uWDyPtRp\n         Z8mTRhr0/7G/2tn3ZJC2z4iIpc18BRmJBqrgvGKldvrPoToriJEpzez1g1R+lwv++Ici\n         ggwRo89Hp6w88A603QHCgpVgIHMT5/N/KtCLrRAK3N3ueQ1i9UcTU4MIpR7FP7oyeHD6\n         3zcsBKCo7r4WBtaAEaM++wttPX7uY2kn4HKt9fEUh1IZyNBwrXZqdnqvRHvPvw1A2wpO\n         +NGw==\nX-Gm-Message-State: AIVw111QoVe0APc/oB48SFi97uKf8cJ3g8jUmfTbXmdkI2pGXPiHiiv/\n\tS3r+kEit69C2VVF0UZjkbg==\nX-Received: by 10.233.216.1 with SMTP id u1mr13039022qkf.10.1500062566429;\n        Fri, 14 Jul 2017 13:02:46 -0700 (PDT)\nReceived: from [172.31.99.153] (50-246-89-187-static.hfc.comcastbusiness.net. [50.246.89.187])\n        by smtp.gmail.com with ESMTPSA id q40sm7867459qtf.42.2017.07.14.13.02.44\n        for <test@sendmailfor.me>\n        (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);\n        Fri, 14 Jul 2017 13:02:45 -0700 (PDT)\nContent-Type: text/plain; charset=us-ascii\nMime-Version: 1.0 (Mac OS X Mail 9.3 \\(3124\\))\nSubject: Re: Test\nFrom: Avi Goldman <avi.goldman@sparkpost.com>\nIn-Reply-To: <B5.01.04309.E1029695@a.mta1vrest.cc.prd.sparkpost>\nDate: Fri, 14 Jul 2017 16:03:23 -0400\nContent-Transfer-Encoding: 7bit\nMessage-Id: <079ABE5F-7432-4733-9400-091223B1487C@sparkpost.com>\nReferences: <B5.01.04309.E1029695@a.mta1vrest.cc.prd.sparkpost>\nTo: Test <test@sendmailfor.me>\nX-Mailer: Apple Mail (2.3124)\n\nhi there\n",
+          "email_rfc822_is_base64": false,
+          "to": [
+            "test@sendmailfor.me"
+          ]
+        },
+        "msg_from": "avi.goldman@sparkpost.com",
+        "webhook_id": "120667741918446235",
+        "protocol": "smtp"
+      }
+    }
+  }
+]

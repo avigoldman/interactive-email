@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'proxima nova', Arial, sans-serif;
+        background-color: #F2F2F5;
+        color: #333;
+      }
+
+      #logo {
+        width: 240px;
+        max-width: 100%;
+        margin: 35px auto 20px auto;
+      }
+
+      #logo img {
+        width: 100%;
+      }
+
+      #container {
+        max-width: 600px;
+        width: 94%;
+        margin: 1.5em auto;
+        padding: 2em 1.5em;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(65,65,70,.1);
+        border-bottom: 1px solid #f2f2f5;
+      }
+
+      h1 {
+        margin: 0;
+        margin-bottom: .25em;
+      }
+
+      h2, h3, h4, h5, h6 {
+        font-weight: normal;
+        margin: 0 0 1.5em 0;
+      }
+
+      hr {
+        border: 0;
+        border-bottom: 1px solid #d2d2d7;
+        margin: 1.5em 0;
+      }
+
+      .tagline {
+        margin-top: .5em;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .question {
+        font-size:1.4em;
+        margin-bottom: .5em;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+      
+      .button {
+        background: #FA6423;
+        color: white;
+        padding: 10px 20px;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 1.15em;
+      }
+    </style>
+    <style>
+      #interactive { display: none; }
+      #h-interactive:checked + #interactive { display: block; }
+      #h-interactive:checked ~ #fallback { display: none; }
+
+      #submitted-content { display: none; }
+      #h-submit:checked + #form { height: 2px; overflow: hidden; }
+      #h-submit:checked ~ #submitted-content { display: block; }
+      
+      /*hide all the background images if we haven't submited yet*/
+      #h-submit:not(:checked) + #form .hook + label,
+      #h-submit:not(:checked) + #form .hook + label + .alternative-checkbox,
+      #h-submit:not(:checked) + #form select option,
+      /*hide all the background images if we submitted but they weren't chosen */
+      #h-submit:checked + #form .hook:not(:checked) + label,
+      #h-submit:checked + #form .hook:checked       + label + .alternative-checkbox,
+      #h-submit:checked + #form select option:not(:checked) {
+        background-image: none !important;
+      }
+
+
+    </style>
+    <style>
+      .hide {
+        width: 0;
+        height: 0;
+        display: none;
+        /*opacity: .5;*/
+      }
+
+      input, select {
+        outline: 0;
+        font-size: 1.2em;
+      }
+
+      label {
+        cursor: pointer;
+      }
+
+      .input-wrapper {
+        width: 100%;
+        margin-bottom: 2.5em;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      .input-wrapper td {
+        border: 0;
+      }
+
+      .input-wrapper td {
+        text-align: center;
+      }
+
+      .radio label {
+        display: inline-block;
+        padding: 13px 10px 7px;
+        line-height: 1em;
+        border-radius: 50%;
+        font-size: 2em;
+      }
+
+      .radio input:checked + label {
+        background: #F2F2F5
+      }
+
+      .boolean label {
+        display: inline-block;
+        padding: .34em 0;
+        background: #f2f2f5;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+      }
+
+      .boolean input:checked + label {
+        background: #37aadc;
+        color: #fff;
+      }
+
+      .boolean td:first-of-type {
+        text-align: right;
+      }
+
+      .boolean td:first-of-type label {
+        border-radius: 3px 0 0 3px;
+        padding: .4em 0 .3em 0;
+      }
+
+      .boolean td:last-of-type {
+        text-align: left;
+      }
+
+      .boolean td:last-of-type label {
+        border-radius: 0 3px 3px 0;
+      }
+
+      select {
+        padding: 5px;
+        background: #FFF;
+        width: 100%;
+        height: 34px;
+        line-height: 1;
+        font: inherit;
+        border-radius: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="{{url}}/api/forms/{{form}}/{{id}}/opened/yes">
+    <div id="logo">
+      <img src="https://raw.githubusercontent.com/SparkPost/php-sparkpost/master/examples/transmissions/sparkpost.png" alt="SparkPost">
+    </div>
+    <div id="container">
+      <input type="checkbox" id="h-interactive" class="hide" checked>
+      <div id="interactive">
+        <input type="checkbox" id="h-submit" class="hide">
+        <div id="form">
+          <h1>We'd love your help with this!</h1>
+          <h3 class="tagline">Help us improve our service 💌</h3>
+          <hr>
+          <!-- question 1 -->
+          <h3 class="question">1. How happy are you with SparkPost?</h3>
+          <table class="radio input-wrapper" id="q1">
+            <tr>
+              <td>
+                <input type="radio" id="q1-1" name="q1" class="hide hook">
+                <label for="q1-1" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/happiness/😲)">😲</label>
+              </td>
+              <td>
+                <input type="radio" id="q1-2" name="q1" class="hide hook">
+                <label for="q1-2" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/happiness/🙁)">🙁</label>
+              </td>
+              <td>
+                <input type="radio" id="q1-3" name="q1" class="hide hook">
+                <label for="q1-3" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/happiness/😑)">😑</label>
+              </td>
+              <td>
+                <input type="radio" id="q1-4" name="q1" class="hide hook">
+                <label for="q1-4" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/happiness/🙂)">🙂</label>
+              </td>
+              <td>
+                <input type="radio" id="q1-5" name="q1" class="hide hook" checked>
+                <label for="q1-5" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/happiness/🎉)">🎉</label>
+              </td>
+            </tr>
+          </table>
+          <!-- question 2 -->
+          <h3 class="question">2. How many emails do you send per month?</h3>
+          <div class="input-wrapper">
+            <select name="q2" id="q2">
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/100K)">&lt; 100K</option>
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/1M)">&lt; 1M</option>
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/1M-3M)">1M - 3M</option>
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/3M-10M)">3M - 10M</option>
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/10M-30M)">10M - 30M</option>
+              <option style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/volume/30M)">&gt; 30M</option>
+            </select>
+          </div>
+          <br>
+
+          <!-- question 3 -->
+          <h3 class="question">3. Would you like to be a SparkPost ambassador?</h3>
+          <table class="boolean input-wrapper" id="q3">
+            <tr>
+              <td>
+                <input type="radio" id="q3-1" name="q3" class="hide hook" checked>
+                <label for="q3-1" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/ambassador/no)">not now <sub style="font-size: 1em">👎</sub></label>
+              </td>
+              <td>
+                <input type="radio" id="q3-2" name="q3" class="hide hook">
+                <label for="q3-2" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/ambassador/yes)">hell yeah 👍</label>
+                </td>
+            </tr>
+          </table>
+
+          <br>
+          <!-- question 4 -->
+          <h3>
+            <input type="checkbox" id="q4-1" class="hook" checked>
+            <label for="q4-1" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/subscribe/yes)">Keep me updated on SparkPost news</label>
+            <span class="alternative-checkbox" style="background-image: url({{url}}/api/forms/{{form}}/{{id}}/subscribe/no)"></span>
+          </h3>
+          <div class="text-center">
+            <label for="h-submit" class="button">Submit</label>
+          </div>
+        </div>
+
+        <div id="submitted-content" class="text-center">
+          <br>
+          <h1>Thanks for helping us out!</h1>
+          <br>
+          <h3 class="tagline">Want to say more?<br>Reply to this email to share your own unique thoughts 💭</h3>
+        </div>
+      </div>
+      <div id="fallback" class="text-center">
+        <h1>We'd love your help with this!</h1>
+        <h3 class="tagline">Help us improve our service 💌</h3>
+        <a href="#" class="button">Do it!</a>
+      </div>
+    </div>
+  </body>
+</html>
